@@ -10,12 +10,18 @@ use App\Http\Resources\TaskResource;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 
+use Spatie\QueryBuilder\QueryBuilder;
+
 class TaskController extends Controller
 {
 
     public function index(Request $request)
     {
-        return new TaskCollection(Task::paginate());
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters('is_done')
+            ->paginate();
+
+        return new TaskCollection($tasks);
     }
 
     public function show(Request $request, Task $task)

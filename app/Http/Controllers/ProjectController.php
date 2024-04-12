@@ -21,6 +21,11 @@ class ProjectController extends Controller
         return new ProjectResource($project);
     }
 
+    public function show(Request $request, Project $project)
+    {
+        return new ProjectResource($project);
+    }
+
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $validated = $request->validated(); 

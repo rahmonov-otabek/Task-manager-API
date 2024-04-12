@@ -49,4 +49,12 @@ class AuthController extends Controller
             'token_type' => 'Bearer'
         ], 201);
     }
+
+    public function logout(){
+        auth()->user()->tokens()->delete();
+    
+        return response()->json([
+          "message"=>"logged out"
+        ]);
+    }
 }

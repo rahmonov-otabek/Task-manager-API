@@ -23,6 +23,10 @@ class Project extends Model
         return $this->belongsTo(User::class, 'creator_id');
     }
 
+    public function member(){
+        return $this->belongsToMany(User::class, Member::class);
+    }
+
     protected static function booted()
     {
         static::addGlobalScope('creator', function(Builder $builder){

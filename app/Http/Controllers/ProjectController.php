@@ -14,6 +14,11 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Project::class, '');
+    }
+
     public function index(Request $request)
     {
         $projects = QueryBuilder::for(Project::class)

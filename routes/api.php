@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MembersController;
 use App\Http\Controllers\AuthController;
 
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('tasks', TaskController::class);
     Route::apiResource('project', ProjectController::class);
+    Route::apiResource('project.members', MembersController::class)->only([
+        'index', 'store', 'destroy',
+    ]);
+
 
     Route::post('logout', [AuthController::class, 'logout']);
 });

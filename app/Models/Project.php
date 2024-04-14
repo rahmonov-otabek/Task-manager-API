@@ -23,7 +23,7 @@ class Project extends Model
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function member(){
+    public function members(){
         return $this->belongsToMany(User::class, Member::class);
     }
 

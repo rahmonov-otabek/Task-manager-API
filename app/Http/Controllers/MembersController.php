@@ -23,6 +23,17 @@ class MembersController extends Controller
         ]);
 
         $project->members()->syncWithoutDetaching([$request->user_id]);
+
+        $members = $project->members;
+
+        return new UserCollection($members);
+    }
+
+    public function destroy(Request $request, Project $project, int $member)
+    {
+        abort_if($project->creator_id === $member, 400, "Cannot remove creator from project.");
+
+        $project->members()->detach([$member]);
         
         $members = $project->members;
 

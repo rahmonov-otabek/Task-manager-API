@@ -27,6 +27,11 @@ class Project extends Model
         return $this->belongsToMany(User::class, Member::class);
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     protected static function booted()
     {
         static::addGlobalScope('member', function(Builder $builder){
